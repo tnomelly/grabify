@@ -1,1 +1,86 @@
-loadstring(game:HttpGet('https://pastebin.com/raw/i44DhiYJ' true)()
+local HWIDTable = loadstring(game:HttpGet("https://pastebin.com/raw/rBaWqtUg"))()
+local HWID = game:GetService("RbxAnalyticsService"):GetClientId()
+
+local isWhitelisted = false
+for i, v in pairs(HWIDTable) do
+    if v == HWID then
+        isWhitelisted = true
+        break
+    end
+end
+
+if isWhitelisted then
+    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+    local Window = Library.CreateLib("KoMadeUs Hub", "Midnight")
+
+    local MainTab = Window:NewTab("Main")
+    local Section = MainTab:NewSection("Important")
+
+    Section:NewToggle("HBE", "ToggleInfo", function(state)
+        -- Toggle logic...
+    end)
+
+    Section:NewSlider("ballspeed", "Speed with the ball default ~70", 90, 71, function(num)
+        -- Slider logic...
+    end)
+
+    local ankles_c = 0
+    local fall_c = 0
+
+    local function manipulateAnkles()
+        -- Manipulate ankles logic...
+    end
+
+    local function revertAnklesManipulation()
+        -- Revert ankles manipulation logic...
+    end
+
+    Section:NewToggle("Manipulate Ankles", "Toggle to manipulate ankles", function(state)
+        if state then
+            manipulateAnkles()
+        else
+            revertAnklesManipulation()
+        end
+    end)
+
+    local Section2 = MainTab:NewSection("Join people")
+
+    Section2:NewTextBox("Join Anyone", "Enter username to join their game", function(txt)
+        -- TextBox logic...
+    end)
+
+    Section2:NewButton("Join", "Join the specified player's game", function()
+        -- Join button logic...
+    end)
+
+    local statsTab = Window:NewTab("Stats")
+    local statsSection = statsTab:NewSection("Check Stats")
+
+    local statCheckUsername = nil
+    local wl = statsSection:NewLabel("wins/losses")
+    local arch = statsSection:NewLabel("build information")
+    local secondarch = statsSection:NewLabel("second build info")
+
+    statsSection:NewTextBox("USERNAME", "The username of the player you want to stat check", function(txt)
+        statCheckUsername = txt
+    end)
+
+    statsSection:NewButton("check stats", "Checks stats", function()
+        -- Stats check button logic...
+    end)
+
+    local SettingsTab = Window:NewTab("Settings")
+    local SettingsSection = SettingsTab:NewSection("Settings Section")
+
+    SettingsSection:NewToggle("Toggle Setting", "Toggle description", function(state)
+        print("Toggle state:", state)
+    end)
+
+    SettingsSection:NewSlider("Slider Setting", "Slider description", 0, 100, 50, function(value)
+        print("Slider value:", value)
+    end)
+
+    -- Rest of your UI creation code goes here...
+else
+    game.Players.LocalPlayer:Kick("Not Whitelisted")
+end
